@@ -36,7 +36,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 " Pretty bulky but useful syntax engine + autocompletion
 " Disable on pc's with space constraint
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-surround'
@@ -102,7 +102,7 @@ nnoremap <A-Right> :wincmd l<CR>
 nnoremap <A-l> :wincmd l<CR>
 
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " Easymotion
 " Fuzzy Search
