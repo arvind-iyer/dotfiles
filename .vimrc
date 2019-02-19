@@ -33,6 +33,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'flazz/vim-colorschemes'
+" Pretty bulky but useful syntax engine + autocompletion
+" Disable on pc's with space constraint
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-surround'
@@ -45,6 +49,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 " Colorschemes
 Plugin 'sickill/vim-monokai'
 Plugin 'fisadev/fisa-vim-colorscheme'
@@ -68,70 +73,66 @@ nnoremap <C-L> :tabnext<CR>
 nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-H> :tabp<CR>
 nnoremap <C-Left> :tabp<CR>
-nnoremap <silent> <C-n> :tabedit <CR> 
+nnoremap <silent> <C-n> :tabedit <CR>
 
 map tn :tabn<CR>
 map tp :tabp<CR>
-map tm :tabm 
-map tt :tabnew 
+map tm :tabm
+map tt :tabnew
 map ts :tab split<CR>
 
 " Save as sudo
 ca w!! w !sudo tee "%"
 
-
 " Tab Navigation
 "" For Mac OS
-"nnoremap ˙ :wincmd h<CR>
-"nnoremap ∆ :wincmd j<CR>
-"nnoremap ˚ :wincmd k<CR>
-"nnoremap ¬ :wincmd l<CR>
+nnoremap ˙ :wincmd h<CR>
+nnoremap ∆ :wincmd j<CR>
+nnoremap ˚ :wincmd k<CR>
+nnoremap ¬ :wincmd l<CR>
 
 "" For Linux
-"nnoremap <A-Up> :wincmd k<CR>
-"nnoremap <A-k> :wincmd k<CR>
-"nnoremap <A-Down> :wincmd j<CR>
-"nnoremap <A-j> :wincmd j<CR>
-"nnoremap <A-Left> :wincmd h<CR>
-"nnoremap <ESC>h :wincmd h<CR>
-"nnoremap <A-Right> :wincmd l<CR>
-"nnoremap <A-l> :wincmd l<CR>
+nnoremap <A-Up> :wincmd k<CR>
+nnoremap <A-k> :wincmd k<CR>
+nnoremap <A-Down> :wincmd j<CR>
+nnoremap <A-j> :wincmd j<CR>
+nnoremap <A-Left> :wincmd h<CR>
+nnoremap <ESC>h :wincmd h<CR>
+nnoremap <A-Right> :wincmd l<CR>
+nnoremap <A-l> :wincmd l<CR>
 
-" Easymotion 
-" Fuzzy Search 
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+" Easymotion
+" Fuzzy Search
 function! s:config_easyfuzzymotion(...) abort
-	  return extend(copy({
-	    \   'converters': [incsearch#config#fuzzyword#converter()],
-	    \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-	    \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-	    \   'is_expr': 0,
-	    \   'is_stay': 1
-	    \ }), get(a:, 1, {}))
-  endfunction
+    return extend(copy({
+        \   'converters': [incsearch#config#fuzzyword#converter()],
+        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        \   'is_expr': 0,
+        \   'is_stay': 1
+        \ }), get(a:, 1, {}))
+endfunction
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
-" Terraform Vim Integration
-let g:terraform_align=1
-let g:terraform_fold_sections=1
-let g:terraform_remap_spacebar=1
-let g:terraform_commentstring='//%s'
-
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
-	let &t_Co = 256
-    colorscheme monokai
+    let &t_Co = 256
+    colorscheme Atelier_CaveLight
 else
-	colorscheme industry
+    colorscheme industry
 endif
 
 " colors for gvim
 if has('gui_running')
-	colorscheme monokai
+    colorscheme monokai
 endif
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
 set wildmode=list:longest
 
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .">"<CR>
+"map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+"            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+"            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .">"<CR>
